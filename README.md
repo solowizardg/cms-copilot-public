@@ -2,8 +2,6 @@
 
 基于 **LangGraph** 的内容/站点运营 Copilot：把“意图识别 → 任务分流 → 工具调用（含 MCP）→ 结果输出”串成一张可在 **LangGraph Studio** 可视化调试的工作流图。
 
-![LangGraph Studio UI](static/studio_ui.png)
-
 ### 工作流架构图
 
 ```mermaid
