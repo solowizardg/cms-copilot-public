@@ -8,81 +8,87 @@
 
 ```mermaid
 graph TD
-    classDef default fill:#f9fafb,stroke:#d1d5db,stroke-width:1px,color:#1f2937,rx:6px,ry:6px;
-    classDef startend fill:#1e293b,stroke:#0f172a,stroke-width:0px,color:#f8fafc,rx:20px,ry:20px;
-    classDef router fill:#fff7ed,stroke:#fdba74,stroke-width:2px,color:#9a3412;
-    classDef ui fill:#fdf4ff,stroke:#d8b4e2,stroke-width:2px,color:#86198f;
-    classDef task fill:#f0fdf4,stroke:#86efac,stroke-width:2px,color:#166534;
+    %% Define Node Styles (cleaner, GitHub-compatible basic CSS)
+    classDef start_end fill:#1e293b,stroke:#64748b,stroke-width:2px,color:#f8fafc
+    classDef ui_node fill:#1e1b4b,stroke:#8b5cf6,stroke-width:1px,color:#e2e8f0
+    classDef logic_node fill:#064e3b,stroke:#10b981,stroke-width:1px,color:#e2e8f0
+    classDef router_node fill:#4c1d95,stroke:#a855f7,stroke-width:1px,color:#e2e8f0
 
-    START([START]) ::: startend
-    END_NODE([END]) ::: startend
+    %% Nodes
+    __start__([__start__]) ::: start_end
+    __end__([__end__]) ::: start_end
 
-    entry[Entry Node] ::: default
-    router_ui[Intent UI] ::: ui
-    router{Route Intent} ::: router
+    entry([entry]) ::: logic_node
+    router_ui([router_ui]) ::: ui_node
+    router([router]) ::: router_node
+    
+    article_clarify([article_clarify]) ::: logic_node
+    article_ui([article_ui]) ::: ui_node
+    article_run([article_run]) ::: logic_node
+    
+    shortcut_ui([shortcut_ui]) ::: ui_node
+    shortcut([shortcut]) ::: logic_node
+    
+    report_ui([report_ui]) ::: ui_node
+    report([report]) ::: logic_node
+    
+    rag_ui([rag_ui]) ::: ui_node
+    rag([rag]) ::: logic_node
+    
+    introduction([introduction]) ::: logic_node
+    
+    seo_ui([seo_ui]) ::: ui_node
+    seo([seo]) ::: logic_node
+    
+    intent_reconfirm([intent_reconfirm]) ::: logic_node
 
-    START --> entry
-    entry -->|"Default (or Resume)"| router_ui
+    %% Edges (Matching the LangGraph Studio UI layout)
+    __start__ --> entry
+
+    %% Edges from entry
+    entry --> router_ui
+    entry --> shortcut_ui
+    entry --> report_ui
+    entry --> article_clarify
+    entry --> intent_reconfirm
+    entry --> __end__
+    entry --> rag_ui
+    entry --> introduction
+    entry --> seo_ui
+    entry --> article_ui
+
+    %% Edges from router_ui
     router_ui --> router
 
-    %% ==== Subgraphs for Logical Groupings ====
-    subgraph SG_Article [Article Task]
-        article_cl[[Clarify Subgraph]] ::: task
-        article_ui[Article UI] ::: ui
-        article_run[Run Article] ::: task
-    end
+    %% Edges from router
+    router --> shortcut_ui
+    router --> report_ui
+    router --> rag_ui
+    router --> introduction
+    router --> seo_ui
+    router --> article_clarify
 
-    subgraph SG_RAG [RAG / QA]
-        rag_ui[RAG UI] ::: ui
-        rag[Handle RAG] ::: task
-    end
-
-    subgraph SG_SEO [SEO Planning]
-        seo_ui[SEO UI] ::: ui
-        seo[Handle SEO] ::: task
-    end
-
-    subgraph SG_Report [Site Report]
-        report_ui[Report UI] ::: ui
-        report[[Report Subgraph]] ::: task
-    end
-
-    subgraph SG_Shortcut [Shortcut]
-        shortcut_ui[Shortcut UI] ::: ui
-        shortcut[[Shortcut Subgraph]] ::: task
-    end
-
-    subgraph SG_Intro [Intro]
-        intro[Handle Intro] ::: task
-    end
-
-    %% ==== Router Edge Connections ====
-    router -->|article_task| article_cl
-    router -->|rag| rag_ui
-    router -->|seo_planning| seo_ui
-    router -->|site_report| report_ui
-    router -->|shortcut| shortcut_ui
-    router -->|introduction| intro
-
-    %% ==== Inner Node Edge Connections ====
-    article_cl -->|pending| END_NODE
-    article_cl -->|ready| article_ui
+    %% Sub-flows
+    article_clarify --> __end__
+    article_clarify --> article_ui
     article_ui --> article_run
-    article_run --> END_NODE
-
-    rag_ui --> rag
-    rag --> END_NODE
-
-    seo_ui --> seo
-    seo --> END_NODE
-
-    report_ui --> report
-    report --> END_NODE
+    article_run --> __end__
 
     shortcut_ui --> shortcut
-    shortcut --> END_NODE
+    shortcut --> __end__
 
-    intro --> END_NODE
+    report_ui --> report
+    report --> __end__
+
+    intent_reconfirm --> __end__
+
+    rag_ui --> rag
+    rag --> __end__
+
+    introduction --> __end__
+
+    seo_ui --> seo
+    seo --> __end__
 ```
 
 ### 你能用它做什么
