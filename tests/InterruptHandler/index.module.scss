@@ -1,0 +1,171 @@
+.root {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.hitlContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  background: #F5F3FF;
+  border: 1px solid #818CF8;
+  border-radius: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid #E5E7EB;
+}
+
+.headerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #6366F1;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 22px;
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.headerTitle {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1E1B4B;
+}
+
+.headerDesc {
+  margin: 0;
+  font-size: 13px;
+  color: #6B7280;
+}
+
+.actionButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.successAlert {
+  border-radius: 10px;
+  background: #ECFDF5;
+  border-color: #10B981;
+}
+
+.jsonPre {
+  margin: 0;
+  padding: 14px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+  color: #1E1B4B;
+}
+
+/* 进度指示器（用于多操作场景） */
+.progressBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+}
+
+.progressLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #1E1B4B;
+}
+
+.progressDots {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+}
+
+.progressDot {
+  flex: 1;
+  height: 8px;
+  background: #E5E7EB;
+  border: none;
+  border-radius: 4px;
+  transition: background 180ms ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: 2px solid #6366F1;
+    outline-offset: 2px;
+  }
+
+  &.active {
+    background: #6366F1;
+  }
+
+  &.approved {
+    background: #10B981;
+  }
+
+  &.rejected {
+    background: #EF4444;
+  }
+
+  &.edited {
+    background: #818CF8;
+  }
+}
+
+.progressCount {
+  font-size: 12px;
+  color: #6B7280;
+}
+
+/* 导航按钮 */
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid #E5E7EB;
+}
+
+.navButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.submitAllButton {
+  min-width: 160px;
+  background: #10B981;
+  border-color: #10B981;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressDot {
+    transition: none;
+  }
+}

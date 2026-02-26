@@ -1,0 +1,254 @@
+.root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.argsCard {
+  padding: 18px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+}
+
+.argsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.argItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.argLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1E1B4B;
+}
+
+.argIcon {
+  font-size: 14px;
+  color: #6366F1;
+}
+
+.argValue {
+  padding: 12px 14px;
+  background: #F5F3FF;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 22px;
+  color: #1E1B4B;
+  word-break: break-word;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  padding: 20px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  transition: border-color 180ms ease;
+
+  &:hover {
+    border-color: #818CF8;
+  }
+}
+
+.rejectCard {
+  background: #FEF2F2;
+  border-color: #FECACA;
+
+  &:hover {
+    border-color: #F87171;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.cardHeaderTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1E1B4B;
+}
+
+.cardHeaderIcon {
+  font-size: 18px;
+  color: #6366F1;
+}
+
+.rejectIcon {
+  color: #EF4444;
+}
+
+.resetButton {
+  color: #6B7280;
+  cursor: pointer;
+  transition: color 180ms ease;
+
+  &:hover {
+    color: #EF4444;
+    background: #FEF2F2;
+  }
+
+  &:focus {
+    outline: 2px solid #6366F1;
+    outline-offset: 2px;
+  }
+}
+
+.editFields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editFieldLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1E1B4B;
+}
+
+.editFieldIcon {
+  font-size: 14px;
+  color: #6366F1;
+}
+
+.editFieldInput {
+  border-radius: 8px;
+  border-color: #E5E7EB;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+  transition: border-color 180ms ease;
+
+  &:focus {
+    border-color: #6366F1;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+  }
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.cardFooterHint {
+  font-size: 12px;
+  color: #6B7280;
+}
+
+.submitButton {
+  height: 42px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #10B981;
+  border-color: #10B981;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: #059669;
+    border-color: #059669;
+  }
+
+  &:focus {
+    outline: 2px solid #10B981;
+    outline-offset: 2px;
+  }
+}
+
+.dividerContainer {
+  padding: 8px 0;
+}
+
+.divider {
+  margin: 0;
+  color: #6B7280;
+  font-size: 12px;
+}
+
+.loadingHint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #EFF6FF;
+  border-radius: 8px;
+  border: 1px solid #BFDBFE;
+  font-size: 13px;
+  color: #1D4ED8;
+}
+
+.loadingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #6366F1;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.selectionHint {
+  padding: 10px 16px;
+  background: #F5F3FF;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #6B7280;
+}
+
+.selectionType {
+  font-weight: 600;
+  color: #1E1B4B;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .resetButton,
+  .editFieldInput {
+    transition: none;
+  }
+
+  .loadingSpinner {
+    animation: none;
+  }
+}

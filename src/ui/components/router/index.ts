@@ -1,0 +1,1 @@
+export { IntentRouterCard } from "./IntentRouterCard";
