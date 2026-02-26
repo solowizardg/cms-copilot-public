@@ -8,8 +8,6 @@
 
 ```mermaid
 graph TD
-```mermaid
-graph TD
     classDef start_end fill:#1e293b,stroke:#64748b,stroke-width:2px,color:#f8fafc
     classDef ui_node fill:#1e1b4b,stroke:#8b5cf6,stroke-width:1px,color:#e2e8f0
     classDef logic_node fill:#064e3b,stroke:#10b981,stroke-width:1px,color:#e2e8f0
