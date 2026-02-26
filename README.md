@@ -2,6 +2,89 @@
 
 基于 **LangGraph** 的内容/站点运营 Copilot：把“意图识别 → 任务分流 → 工具调用（含 MCP）→ 结果输出”串成一张可在 **LangGraph Studio** 可视化调试的工作流图。
 
+![LangGraph Studio UI](static/studio_ui.png)
+
+### 工作流架构图
+
+```mermaid
+graph TD
+    classDef default fill:#f9fafb,stroke:#d1d5db,stroke-width:1px,color:#1f2937,rx:6px,ry:6px;
+    classDef startend fill:#1e293b,stroke:#0f172a,stroke-width:0px,color:#f8fafc,rx:20px,ry:20px;
+    classDef router fill:#fff7ed,stroke:#fdba74,stroke-width:2px,color:#9a3412;
+    classDef ui fill:#fdf4ff,stroke:#d8b4e2,stroke-width:2px,color:#86198f;
+    classDef task fill:#f0fdf4,stroke:#86efac,stroke-width:2px,color:#166534;
+
+    START([START]) ::: startend
+    END_NODE([END]) ::: startend
+
+    entry[Entry Node] ::: default
+    router_ui[Intent UI] ::: ui
+    router{Route Intent} ::: router
+
+    START --> entry
+    entry -->|"Default (or Resume)"| router_ui
+    router_ui --> router
+
+    %% ==== Subgraphs for Logical Groupings ====
+    subgraph SG_Article [Article Task]
+        article_cl[[Clarify Subgraph]] ::: task
+        article_ui[Article UI] ::: ui
+        article_run[Run Article] ::: task
+    end
+
+    subgraph SG_RAG [RAG / QA]
+        rag_ui[RAG UI] ::: ui
+        rag[Handle RAG] ::: task
+    end
+
+    subgraph SG_SEO [SEO Planning]
+        seo_ui[SEO UI] ::: ui
+        seo[Handle SEO] ::: task
+    end
+
+    subgraph SG_Report [Site Report]
+        report_ui[Report UI] ::: ui
+        report[[Report Subgraph]] ::: task
+    end
+
+    subgraph SG_Shortcut [Shortcut]
+        shortcut_ui[Shortcut UI] ::: ui
+        shortcut[[Shortcut Subgraph]] ::: task
+    end
+
+    subgraph SG_Intro [Intro]
+        intro[Handle Intro] ::: task
+    end
+
+    %% ==== Router Edge Connections ====
+    router -->|article_task| article_cl
+    router -->|rag| rag_ui
+    router -->|seo_planning| seo_ui
+    router -->|site_report| report_ui
+    router -->|shortcut| shortcut_ui
+    router -->|introduction| intro
+
+    %% ==== Inner Node Edge Connections ====
+    article_cl -->|pending| END_NODE
+    article_cl -->|ready| article_ui
+    article_ui --> article_run
+    article_run --> END_NODE
+
+    rag_ui --> rag
+    rag --> END_NODE
+
+    seo_ui --> seo
+    seo --> END_NODE
+
+    report_ui --> report
+    report --> END_NODE
+
+    shortcut_ui --> shortcut
+    shortcut --> END_NODE
+
+    intro --> END_NODE
+```
+
 ### 你能用它做什么
 
 - **RAG 问答**：支持 SSE 流式输入输出，提供“准备 + 生成”双阶段进度 UI 展示
